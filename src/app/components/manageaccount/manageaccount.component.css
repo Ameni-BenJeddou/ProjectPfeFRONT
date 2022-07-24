@@ -1,0 +1,9 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15%;
+    align-items: center;
+  }
+  h2 {
+      margin-bottom: 70px;
+  }

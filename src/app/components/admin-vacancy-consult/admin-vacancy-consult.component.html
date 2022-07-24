@@ -1,0 +1,245 @@
+<div class="container" id="main-container">
+  <div class="apps">
+    <app-vacancy-applications
+      [viewappMode]="view"
+      [viewVacancy]="viewvacancy"
+      [dataSource]="appdataSource"
+      [shortdataSource]="appshortdataSource"
+    ></app-vacancy-applications>
+  </div>
+  <button id="add" type="submit" class="btn btn-primary"  routerLink="/Admin/managevacancies/add">Add new vacancy</button>
+ 
+  <div class="col-md-6">
+    <app-editvacancy
+      [editvacancyMode]="edit"
+      [editedVacancy]="currentvacancy"
+    ></app-editvacancy>
+
+  </div>
+    <table mat-table [cellPadding]="5" [border]="2" id="table" data-toggle="table" data-search="true" data-filter-control="true" data-click-to-select="true"
+      data-toolbar="#toolbar">
+        <tr>
+          <th data-field="Id" data-filter-control="input" data-sortable="true">
+            Id Opening
+          </th>
+          <th data-field="type" data-filter-control="select" data-sortable="true">
+            Job type
+          </th>
+          <th data-field="departement" data-filter-control="select" data-sortable="true">
+            Department
+          </th>
+          <th data-field="location" data-filter-control="input" data-sortable="true">
+            Location
+          </th>
+          <th data-field="creation" data-filter-control="select" data-sortable="true">
+            Creation Date
+          </th>
+          <th data-field="Relevant_Education_Level" data-filter-control="select" data-sortable="true">
+            Education
+          </th>
+          <th data-field="Relevant_Experience_Level" data-filter-control="select" data-sortable="true">
+            Experience
+          </th>
+          <th data-field="edit" >
+            Action
+          </th>
+         
+        </tr>
+       
+        <tr *ngFor="let Vacancy of dataSource; let i = index ">
+        <td>{{ Vacancy?.id_Opening }}</td>
+          <td>{{ Vacancy?.job_type }}</td>
+          <td>{{ Vacancy?.department }}</td>
+          <td>{{ Vacancy?.location }}</td>
+          <td>{{ Vacancy?.creation_Date | date:'dd/MM/yyyy' }}</td>
+          <td>{{ Vacancy?.relevant_Education_Level }}</td>
+          <td>{{ Vacancy?.relevant_Experience_Level }}</td>
+          <td  (click)="setviewVacancy(Vacancy, i)" class="btn btn-primary tooltips" data-original-title="Edit">
+            <i class="fa fa-pencil" >View apps</i>
+          </td>
+          <td  (click)="setActiveVacancy(Vacancy, i)" class="btn btn-primary tooltips" data-original-title="Edit">
+            <i class="fa fa-pencil">Edit</i>
+          </td>
+          <td (click)="vacancyclose(Vacancy.id_Opening,Vacancy)" class="btn btn-secondary tooltips" data-original-title="Delete">
+            <i class="fa fa-times">Delete</i>
+          </td>
+        </tr>
+    </table>
+  </div>
+
+
+<!-- Notification for no Vacancys -->
+<div *ngIf="dataSource?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">NO vacancies!</h4>
+    <p>No vacancies were found.</p>
+  </div>
+</div>
+<router-outlet></router-outlet>
+
+<!--
+ Add Vacancy Modal 
+<div class="modal fade" id="addvacancyyModal" tabindex="-1" role="dialog" aria-labelledby="addvacancyyModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="addvacancyyModalLabel">Add vacancyy</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #addForm="ngForm" (ngSubmit)="onAddVacancy()">
+        <div class="form-group">
+          <label for="Job_type">Job type</label>
+          <input type="text" ngModel name="Job_type" class="form-control" id="Job_type" placeholder="ex. Developer"
+            required ngModel="{{ vacancy?.Job_type }}" />
+        </div>
+        <div class="form-group">
+          <label for="Department">Department</label>
+          <input type="text" ngModel name="Department" class="form-control" id="Department" placeholder="ex. finance"
+            required [(ngModel)]="vacancy.Department" />
+        </div>
+        <div class="form-group">
+          <label for="Location">Location</label>
+          <input type="text" ngModel name="Location" class="form-control" id="Location" placeholder="ex. bizerte"
+            required [(ngModel)]="vacancy.Location" />
+        </div>
+        <div class="form-group">
+          <label for="Description">Description</label>
+          <input type="text" ngModel name="Description" class="form-control" id="Description"
+            placeholder="Write a brief job description here" required [(ngModel)]="vacancy.Description" />
+        </div>
+        <div class="form-group">
+          <label for="Gender">Gender</label>
+          <SELECT type="" ngModel name="Gender" class="form-control" id="Gender" required
+            [(ngModel)]="vacancy.Gender">
+            <OPTION>Either </OPTION>
+            <OPTION>Female </OPTION>
+            <OPTION>Male </OPTION>
+          </SELECT>
+        </div>
+        <div class="form-group">
+          <label for="Relevant_Education_Level">Relevant Education Level</label>
+          <input type="number" ngModel name="Relevant_Education_Level" class="form-control"
+            id="Relevant_Education_Level" placeholder="relevant education years needed" required
+            [(ngModel)]="vacancy.Relevant_Education_Level" />
+        </div>
+        <div class="form-group">
+          <label for="Relevant_Experience_Level">Relevant Experience Level</label>
+          <input type="number" ngModel name="Relevant_Experience_Level" class="form-control"
+            id="Relevant_Experience_Level" placeholder="relevant Experience years needed" required
+            [(ngModel)]="vacancy.Relevant_Experience_Level" />
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="add-vacancyy-form" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+          <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">
+            Save changes
+          </button>
+        </div>
+        <div *ngIf="submitted">
+          <h4>Vacancy was submitted successfully!</h4>
+          <button class="btn btn-success" (click)="newTutorial()">
+            Add again
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+Edit Modal 
+<div class="modal fade" id="updatevacancyyModal" tabindex="-1" role="dialog" aria-labelledby="vacancyyEditModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="updatevacancyyModalLabel">
+        Edit vacancy number {{ editVacancy?.id_Opening }}
+      </h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #editForm="ngForm">
+        <div class="form-group">
+          <label for="Job_type">Job type</label>
+          <input type="text" [(ngModel)]="editVacancy.job_type" name="Job_type" class="form-control" id="Job_type" />
+        </div>
+        <label for="Department">Department</label>
+        <input type="text" [(ngModel)]="editVacancy.department" name="Department" class="form-control"
+          id="Department" />
+        <div class="form-group">
+          <label for="Location">Location</label>
+          <input type="text" [(ngModel)]="editVacancy.location" name="Location" class="form-control" id="Location" />
+        </div>
+        <div class="form-group">
+          <label for="Description">Description</label>
+          <input type="text" [(ngModel)]="editVacancy.description" name="Description" class="form-control"
+            id="Description" />
+        </div>
+        <div class="form-group">
+          <label for="Gender">Gender</label>
+          <SELECT type="text" [(ngModel)]="editVacancy.gender" name="Gender" class="form-control" id="Gender">
+            <OPTION>Either </OPTION>
+            <OPTION>Female </OPTION>
+            <OPTION>Male </OPTION>
+          </SELECT>
+        </div>
+        <div class="form-group">
+          <label for="Relevant_Education_Level">Relevant Education Level</label>
+          <input type="text" [(ngModel)]="editVacancy.relevant_Education_Level" name="Relevant_Education_Level"
+            class="form-control" id="Relevant_Education_Level" />
+        </div>
+        <div class="form-group">
+          <label for="Relevant_Experience_Level">Relevant Experience Level</label>
+          <input type="text" [(ngModel)]="editVacancy.relevant_Experience_Level" name="Relevant_Experience_Level"
+            class="form-control" id="Relevant_Experience_Level" />
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="edit-vacancyy-form" data-dismiss="modal" class="btn btn-secondary">
+            Close
+          </button>
+          <button (click)="onUpdateVacancy()" data-dismiss="modal" class="btn btn-primary">
+            Save changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+ Delete Modal 
+<div class="modal fade" id="deletevacancyyModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="deleteModelLabel">Delete vacancyy</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>
+        Are you sure you want to delete vacancyy number
+        {{ deleteVacancy?.id_Opening }}?
+      </p>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          No
+        </button>
+        <button (click)="onDeleteVacancy(deleteVacancy?.id_Opening)" class="btn btn-danger" data-dismiss="modal">
+          Yes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</div> -->

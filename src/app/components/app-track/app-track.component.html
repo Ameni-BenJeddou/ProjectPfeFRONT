@@ -1,0 +1,16 @@
+<div class="container" id="main-container">
+	<div class="row">
+<div *ngFor="let Application of Applications" >
+	<ul class="tilesWrap">
+		<li>
+			<h2>{{Application?.status}}</h2>
+			<h3>{{Application?.id_Opening?.job_type}}</h3>
+			<h4>{{Application?.id_Opening?.location}}</h4>
+			<p>
+					{{Application?.id_Opening?.description}}
+			</p>
+			<button type="submit"  >Read more</button>
+		</li>
+	</ul>
+</div>
+</div>

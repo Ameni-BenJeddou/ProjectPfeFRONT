@@ -1,0 +1,15 @@
+
+    .mat-icon {
+        vertical-align: middle;
+        margin-right: 20px;
+      }
+      .profile-card {
+        text-align: center;
+        padding: 50px 10px 100px;
+      }
+        .mat-icon {    font-size: 100px;
+          border-radius: 50%;
+        }
+        mat-drawer {
+          width: 20px;
+        }

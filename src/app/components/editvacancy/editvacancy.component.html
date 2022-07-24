@@ -1,0 +1,49 @@
+<div *ngIf="editvacancyMode" id="edit">
+    <div *ngIf="editedVacancy.id_Opening">
+      <h4>Editing vacancy number {{editedVacancy.id_Opening}} </h4>
+      <form #Form="ngForm" (ngSubmit)="onEditVacancy()">
+        <div class="form-group">
+            <label for="Job_type">Job type </label>
+            <input type="text" [(ngModel)]="editedVacancy.job_type" name="job_type" class="form-control" id="Job_type"
+                placeholder="Job type" required />
+        </div>
+        <div class="form-group">
+            <label for="Description">Description </label>
+            <input type="text" [(ngModel)]="editedVacancy.description" name="Description" class="form-control" id="Description"
+                placeholder="Description" required />
+        </div>
+        <div class="form-group">
+            <label for="department">Department </label>
+            <input type="text" [(ngModel)]="editedVacancy.department" name="department" class="form-control" id="department"
+                placeholder="Department" required />
+        </div>
+        <div class="form-group">
+            <label for="location">Location </label>
+            <input type="text" [(ngModel)]="editedVacancy.location" name="location" class="form-control" id="location"
+                placeholder="Location" required />
+        </div>
+        <div class="form-group">
+            <label for="Relevant_Education_Level">Relevant education Level </label>
+            <input type="number" [(ngModel)]="editedVacancy.relevant_Education_Level" name="Relevant_Education_Level" class="form-control" id="Relevant_Education_Level"
+                placeholder="Relevant education Level" required />
+        </div>
+        <div class="form-group">
+            <label for="Relevant_Experience_Level">Relevant Experience Level </label>
+            <input type="number" [(ngModel)]="editedVacancy.relevant_Experience_Level" name="Relevant_Experience_Level" class="form-control" id="Relevant_Experience_Level"
+                placeholder="Relevant Experience Level" required />
+        </div>
+        <div class="modal-footer">
+            <button type="button" (click)="dismissedit()" class="btn btn-secondary" data-dismiss="modal" routerLink="/Admin/managevacancies">Dismiss</button>
+    
+            <button type="submit" class="btn btn-primary">Edit Vacancy</button>
+        </div>
+        <div class="alert alert-warning" *ngIf="Form.submitted && iseditFailed">
+            Vacancy edit failed<br />{{ errorMessage }}
+          </div>
+    </form>
+    <div class="alert alert-success" *ngIf="isSuccessful">
+      Your editing is successful!
+    </div>
+    </div>
+</div>
+    <router-outlet></router-outlet>

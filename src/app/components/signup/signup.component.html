@@ -1,0 +1,65 @@
+<html>
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+      <a routerLink="" routerLinkActive="active"> Sign In </a>
+      <h2 class="active">Sign Up</h2>
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <!-- SignUp Form -->
+      <form
+        *ngIf="!isSuccessful"
+        name="form"
+        (ngSubmit)="onSubmit()"
+        #f="ngForm"
+        novalidate
+      >
+        
+        <div class="form-group">
+          <br />
+          <input
+            type="email"
+            id="email"
+            class="fadeIn second form-control"
+            [(ngModel)]="form.email"
+            name="email"
+            email
+            #email="ngModel"
+            required
+            placeholder="Email"
+          /><br />
+        </div>
+
+        <div class="form-group">
+          <input
+            type="password"
+            id="password"
+            class="fadeIn third form-control"
+            [(ngModel)]="form.password"
+            name="password"
+            placeholder="password"
+            required
+            minlength="6"
+            #password="ngModel"
+          />
+        </div>
+        <br /><br /><br />
+        <div class="form-group">
+          <button type="Submit" class="fadeIn fourth">Create account</button>
+        </div>
+        <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+          Signup failed!<br />{{ errorMessage }}
+        </div>
+        
+      </form>
+      <div class="alert alert-success" *ngIf="isSuccessful">
+        Your registration is successful!
+        <a routerLink="/createresume" routerLinkActive="active"> Proceed to account </a>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</html>

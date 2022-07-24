@@ -1,0 +1,63 @@
+<form #Form="ngForm" >
+    <div class="form-group">
+        <label for="Job_type">Job type </label>
+        <input type="text" [(ngModel)]="currentvacancy.job_type" name="job_type" class="form-control" id="Job_type"
+            placeholder="Job type" required />
+    </div>
+    <div class="form-group">
+        <label for="Description">Description </label>
+        <input type="text" [(ngModel)]="currentvacancy.description" name="Description" class="form-control" id="Description"
+            placeholder="Description" required />
+    </div>
+    <div class="form-group">
+        <label for="department">Department </label>
+        <input type="text" [(ngModel)]="currentvacancy.department" name="department" class="form-control" id="department"
+            placeholder="Department" required />
+    </div>
+    <div class="form-group">
+        <label for="location">Location </label>
+        <input type="text" [(ngModel)]="currentvacancy.location" name="location" class="form-control" id="location"
+            placeholder="Location" required />
+    </div>
+    <div class="form-group">
+        <label for="Relevant_Education_Level">Relevant education Level </label>
+        <input type="number" [(ngModel)]="currentvacancy.relevant_Education_Level" name="Relevant_Education_Level" class="form-control" id="Relevant_Education_Level"
+            placeholder="Relevant education Level" required />
+    </div>
+    <div class="form-group">
+        <label for="Relevant_Experience_Level">Relevant Experience Level </label>
+        <input type="number" [(ngModel)]="currentvacancy.relevant_Experience_Level" name="Relevant_Experience_Level" class="form-control" id="Relevant_Experience_Level"
+            placeholder="Relevant Experience Level" required />
+    </div>
+    <div>
+    <div class="form-group">
+        <label for="skill">skill</label>
+        <SELECT id="skill" type="text" size="1" class="form-control">
+            <OPTION *ngFor="let skill of skills" value="{{skill.id_Skill}}">{{skill.skill_Name}}</OPTION>
+        </SELECT>
+        </div>
+     <div class="form-group">
+        <label for="level">Level (one being lowest)</label>
+        <SELECT id="level" type="number" size="1" class="form-control" >
+            <OPTION>1</OPTION>
+            <OPTION>2</OPTION>
+            <OPTION>3</OPTION>
+            <OPTION>4</OPTION>
+            <OPTION>5</OPTION>
+            </SELECT>   
+         </div>
+         <button (click)="addskill()" class="btn btn-primary">Add skill</button> 
+        </div>
+    <div class="modal-footer">
+        <button type="button"  class="btn btn-secondary" data-dismiss="modal" routerLink="/Admin/managevacancies">Dismiss</button>
+
+        <button  [disabled]="Form.invalid" (click)="onAddVacancy()" class="btn btn-primary">Create Vacancy</button>
+    </div>
+    <div class="alert alert-warning" *ngIf="Form.submitted && isaddFailed">
+        Vacancy creation failed<br />{{ errorMessage }}
+      </div>
+</form>
+<div class="alert alert-success" *ngIf="isSuccessful">
+  Your vacancy creation is successful!
+</div>
+<router-outlet></router-outlet>

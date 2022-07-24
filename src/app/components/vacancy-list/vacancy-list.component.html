@@ -1,0 +1,24 @@
+<div class="col-md-6">
+    <app-vacancyapply
+      [viewMode]="true"
+      [viewedVacancy]="currentvacancy"
+    ></app-vacancyapply>
+  </div>
+<div class="container" id="main-container">
+	<div class="row">
+		<div *ngFor="let Vacancy of vacancies let i = index" >
+	<ul class="tilesWrap">
+		<li>
+			<h2>{{Vacancy.department}}</h2>
+			<h3>{{Vacancy.job_type}}</h3>
+			<h4>{{Vacancy.location}}</h4>
+			<p>
+					{{Vacancy.description}}
+			</p>
+			<button (click)="setActiveVacancy(Vacancy, i)" type="submit"  >Read more</button>
+		</li>
+	</ul>
+</div>
+</div>
+
+</div>

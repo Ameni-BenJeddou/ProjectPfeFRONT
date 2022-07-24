@@ -1,0 +1,139 @@
+
+<!--shortlist-->
+<div class="container" id="main-container">
+
+    <table mat-table [cellPadding]="5" [border]="2" id="table" data-toggle="table" data-search="true" data-filter-control="true" data-click-to-select="true"
+      data-toolbar="#toolbar">
+        <tr>
+          <th data-field="Id" data-filter-control="input" data-sortable="true">
+            Id application
+          </th>
+          <th data-field="opening" data-filter-control="select" data-sortable="true">
+            Id Opening
+          </th>
+          <th data-field="user" data-filter-control="select" data-sortable="true">
+            Applicant
+          </th>
+          
+          <th data-field="creation" data-filter-control="select" data-sortable="true">
+            Creation Date
+          </th>
+          <th data-field="gender" data-filter-control="input" data-sortable="true">
+              Gender
+            </th>
+          <th data-field="Relevant_Education_Level" data-filter-control="select" data-sortable="true">
+            Education
+          </th>
+          <th data-field="Relevant_Experience_Level" data-filter-control="select" data-sortable="true">
+            Experience
+          </th>
+          <th data-field="status" data-filter-control="input" data-sortable="true">
+              Status
+            </th>
+          <th data-field="edit" >
+            Action
+          </th>
+         
+        </tr>
+       
+        <tr *ngFor="let application of shortdataSource; let i = index ">
+        <td>{{ application?.id_Application }}</td>
+          <td>{{ application?.id_Opening.id_Opening }}</td>
+          <td>{{ application?.id_User?.firstName }} {{ application?.id_User?.lastName }}</td>
+          <td>{{ application?.creation_Date | date:'dd/MM/yyyy' }}</td>
+          <td>{{ application?.gender }}</td>
+          <td>{{ application?.relevant_Education_Level }}</td>
+          <td>{{ application?.relevant_Experience_Level }}</td>
+          <td>{{ application?.status }}</td>
+          <td (click)="setActiveApplication(application, i)" class="btn btn-primary tooltips" data-original-title="Edit">
+            <i class="fa fa-pencil" >View resume</i>
+          </td>
+          <td (click)="removefromshortlist(application.id_Application,application)" class="btn btn-secondary tooltips" data-original-title="Delete">
+            <i class="fa fa-times">Remove</i>
+          </td>
+        </tr>
+    </table>
+  </div>
+
+
+<!-- Notification for no Vacancys -->
+<div *ngIf="shortdataSource?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">No shortlist!</h4>
+    <p>No shortlist applications were selected</p>
+  </div>
+</div>
+
+<!--all applications-->
+
+<div class="container" id="main-container">
+  
+      <table mat-table [cellPadding]="5" [border]="2" id="table" data-toggle="table" data-search="true" data-filter-control="true" data-click-to-select="true"
+        data-toolbar="#toolbar">
+          <tr>
+            <th data-field="Id" data-filter-control="input" data-sortable="true">
+              Id application
+            </th>
+            <th data-field="opening" data-filter-control="select" data-sortable="true">
+              Id Opening
+            </th>
+            <th data-field="user" data-filter-control="select" data-sortable="true">
+              Applicant
+            </th>
+            
+            <th data-field="creation" data-filter-control="select" data-sortable="true">
+              Creation Date
+            </th>
+            <th data-field="gender" data-filter-control="input" data-sortable="true">
+                Gender
+              </th>
+            <th data-field="Relevant_Education_Level" data-filter-control="select" data-sortable="true">
+              Education
+            </th>
+            <th data-field="Relevant_Experience_Level" data-filter-control="select" data-sortable="true">
+              Experience
+            </th>
+            <th data-field="status" data-filter-control="input" data-sortable="true">
+                Status
+              </th>
+            <th data-field="edit" >
+              Action
+            </th>
+           
+          </tr>
+         
+          <tr *ngFor="let application of dataSource; let i = index ">
+          <td>{{ application?.id_Application }}</td>
+            <td>{{ application?.id_Opening.id_Opening }}</td>
+            <td>{{ application?.id_User?.firstName }} {{ application?.id_User?.lastName }}</td>
+            <td>{{ application?.creation_Date | date:'dd/MM/yyyy' }}</td>
+            <td>{{ application?.gender }}</td>
+            <td>{{ application?.relevant_Education_Level }}</td>
+            <td>{{ application?.relevant_Experience_Level }}</td>
+            <td>{{ application?.status }}</td>
+            <td (click)="setActiveApplication(application, i)" class="btn btn-primary tooltips" data-original-title="Edit">
+              <i class="fa fa-pencil" >View resume</i>
+            </td>
+            <td (click)="addtoshortlist(application.id_Application,application)" class="btn btn-primary tooltips" data-original-title="Edit">
+              <i class="fa fa-pencil">Shortlist</i>
+            </td>
+            <td (click)="declineapp(application.id_Application,application)" class="btn btn-secondary tooltips" data-original-title="Delete">
+              <i class="fa fa-times">Decline</i>
+            </td>
+          </tr>
+      </table>
+    </div>
+  
+  
+  <!-- Notification for no Applications -->
+  <div *ngIf="dataSource?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+    <div class="alert alert-info" role="alert">
+      <h4 class="alert-heading">NO Applications!</h4>
+      <p>No applications were found.</p>
+    </div>
+  </div>
+
+
+  
+  <router-outlet></router-outlet>
+  

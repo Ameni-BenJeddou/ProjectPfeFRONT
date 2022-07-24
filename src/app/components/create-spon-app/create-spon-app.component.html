@@ -1,0 +1,26 @@
+<br>
+<h2>Create spontaneous application</h2>
+<h3>In order to receive job recommendation in our platform </h3>
+<h3>You have to create a spontaneous application that tell us what field you're looking for</h3>
+<h3>Your only task is to choose a job type and precise your experience in it and our system will take care of the rest </h3>
+
+<form #AddUser_infoForm="ngForm" (ngSubmit)="onAddS_app()">
+    <div class="form-group">
+        <label for="Job_type">Job type </label>
+        <input type="text" [(ngModel)]="form.Job_type" name="Job_type" class="form-control" id="Job_type"
+            placeholder="Job type" required />
+    </div>
+    <div class="form-group">
+        <label for="Relevant_Education_Level">Relevant education Level </label>
+        <input type="number" [(ngModel)]="form.Relevant_Education_Level" name="Relevant_Education_Level" class="form-control" id="Relevant_Education_Level"
+            placeholder="Relevant education Level" required />
+    </div>
+    <div class="form-group">
+        <label for="Relevant_Experience_Level">Relevant Experience Level </label>
+        <input type="number" [(ngModel)]="form.Relevant_Experience_Level" name="Relevant_Experience_Level" class="form-control" id="Relevant_Experience_Level"
+            placeholder="Relevant Experience Level" required />
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Create application</button>
+    </div>
+</form>

@@ -1,0 +1,37 @@
+<mat-card >
+    <h1 style="align-content: center;">Applicants</h1>
+    <table cellspacing="0" cellpadding="2" >
+        <tr>
+            <td> <h2>5</h2></td>
+            <td><h2>21</h2></td>
+            <td><h2>77</h2></td>
+        </tr>
+        <tr style="color:grey;">
+            <td>Today</td>
+            <td>This week</td>
+            <td>This month</td>
+        </tr>
+    </table>
+</mat-card>
+<div >
+   <div style="width:50%; float : left;">
+       <app-pie-chart label="Applicants age" [data]="agechart"></app-pie-chart>
+   </div>
+   <div style="width:50%; float : right;">
+    <app-pie-chart label="Applicants gender" [data]="genderchart"></app-pie-chart>
+   </div>
+</div>
+<div>
+    <app-line></app-line>
+</div>
+<div >
+    <div style="width:50%; float : right;">
+        <app-pie-chart label="Applicants by type" [data]="type"></app-pie-chart>
+    </div>
+    <div style="width:50%; float : left;">
+     <app-pie-chart label="Applicants by status" [data]="status"></app-pie-chart>
+    </div>
+ </div>
+<div>
+    <app-column></app-column>
+</div>

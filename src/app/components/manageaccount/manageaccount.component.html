@@ -1,0 +1,24 @@
+<div class="example-container">
+    <h2>This is where you can edit your account information</h2>
+    <form>
+    <p>    
+    <div class="form-group">
+     <label for="email">Email</label>
+     <input type="text"  [(ngModel)]="emailtoupdate" name="email" class="form-control" id="email"
+     placeholder="email" required >
+     <div class="modal-footer">
+        <button (click)="updateemail(emailtoupdate)" type="submit" class="btn btn-primary">Save </button>
+    </div>
+    </div>
+    <p>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" [(ngModel)]="password" name="password" class="form-control" id="password"
+            placeholder="password" required >
+           
+           <div class="modal-footer">
+            <button (click)="updatepassword(password)" type="submit" class="btn btn-primary">Save </button>
+        </div>
+    </div>
+</form>
+      </div>

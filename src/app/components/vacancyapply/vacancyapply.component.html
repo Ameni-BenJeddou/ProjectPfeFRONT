@@ -1,0 +1,59 @@
+
+<div *ngIf="viewMode">
+    <div *ngIf="viewedVacancy.id_Opening">
+      <h4>Vacancy</h4>
+      <div>
+        <label><strong>Title:</strong></label> {{ viewedVacancy.job_type }}
+      </div>
+      <div>
+        <label><strong>Department:</strong></label>
+        {{ viewedVacancy.department }}
+      </div>
+      <div>
+        <label><strong>Location:</strong></label>
+        {{ viewedVacancy.location }}
+      </div>
+    <div>
+        <label><strong>Description:</strong></label>
+        {{ viewedVacancy.description }}
+      </div>
+      <div>
+        <label><strong>Relevant education level:</strong></label>
+        Bac +{{ viewedVacancy.relevant_Education_Level }}
+      </div>
+      <div>
+        <label><strong>Relevant experience level:</strong></label>
+        Must have {{ viewedVacancy.relevant_Experience_Level }} years of experience
+      </div>
+      <button id="add" type="submit" class="btn btn-primary" (click)="openform()" >
+        Apply
+      </button>
+    </div>
+    
+    <div class="modal-body" style = "display:none" id="form">
+        <form #addForm="ngForm" (ngSubmit)="onapply()" >
+            <div class="form-group">
+                <label for="Relevant_Education_Level">Relevant education Level </label>
+                <input type="number" [(ngModel)]="form.Relevant_Education_Level" name="Relevant_Education_Level" class="form-control" id="Relevant_Education_Level"
+                    placeholder="Relevant education Level" required />
+            </div>
+            <div class="form-group">
+                <label for="Relevant_Experience_Level">Relevant Experience Level </label>
+                <input type="number" [(ngModel)]="form.Relevant_Experience_Level" name="Relevant_Experience_Level" class="form-control" id="Relevant_Experience_Level"
+                    placeholder="Relevant Experience Level" required />
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="dismiss()"  class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                <button type="submit" class="btn btn-primary">Apply for vacancy</button>
+            </div>
+        </form>
+     </div>
+   
+    <div *ngIf="!viewedVacancy">
+      <br />
+      <p>Select a vacancy to apply.</p>
+    </div>
+  </div>
+
+ 
+ 

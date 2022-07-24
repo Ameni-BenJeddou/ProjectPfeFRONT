@@ -1,0 +1,75 @@
+<html>
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+      <h2 class="active">Sign In</h2>
+      <a routerLink="/signup" routerLinkActive="active">Sign up</a>
+      <br />
+      <br />
+      <br />
+      <br />
+
+      <!-- Login Form -->
+      <form
+        *ngIf="!isLoggedIn"
+        name="form"
+        (ngSubmit)="onSubmit()"
+        #f="ngForm"
+        
+      >
+        <div class="form-group">
+          <input
+            type="email"
+            id="email"
+            class="fadeIn second form-control"
+            [(ngModel)]="form.email"
+            name="email"
+            email
+            placeholder="email"
+            required
+            #email="ngModel"
+          />
+
+          <br />
+        </div>
+        <div class="form-group">
+          <input
+            type="password"
+            id="password"
+            class="fadeIn third form-control"
+            ngModel
+            name="password"
+            placeholder="password"
+            [(ngModel)]="form.password"
+            required
+            #password="ngModel"
+          />
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="form-group">
+          <button type="submit" class="fadeIn fourth">Log In</button>
+        </div>
+        <div class="form-group">
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="f.submitted && isLoginFailed"
+          >
+            Login failed: {{ errorMessage }}
+          </div>
+        </div>
+      </form>
+      <div class="alert alert-success" *ngIf="isLoggedIn">
+        Logged in as {{ role }}.
+      </div>
+
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <a class="underlineHover" href="#">Forgot Password?</a>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</html>
