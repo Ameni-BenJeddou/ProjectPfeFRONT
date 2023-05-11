@@ -21,8 +21,9 @@
                     </button>
                     <mat-menu #menu="matMenu">
                         <button mat-menu-item>
-                            <mat-icon>exit_to_app</mat-icon>
-                            Sign out
+                            <mat-icon>exit_to_app</mat-icon>    
+                            <button type="submit" (click)="signout()" class="btn btn-primary">Sign out</button>
+                            
                         </button>
                     </mat-menu>
 

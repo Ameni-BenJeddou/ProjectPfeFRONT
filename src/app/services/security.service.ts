@@ -38,6 +38,8 @@ export class SecurityService {
 
   signOut(): void {
     window.sessionStorage.clear();
+    window.location.reload();
+    
   }
   public saveToken(token: string): void {
     window.sessionStorage.removeItem(TOKEN_KEY);

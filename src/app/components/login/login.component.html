@@ -63,7 +63,8 @@
       </form>
       <div class="alert alert-success" *ngIf="isLoggedIn">
         Logged in as {{ role }}.
-        <a routerLink="/User" routerLinkActive="active"> Proceed to account </a>
+        <a  *ngIf="isuser" routerLink="/User" routerLinkActive="active"> Proceed to account </a>
+        <a *ngIf="isadmin" routerLink="/Admin" routerLinkActive="active"> Proceed to account </a>
       </div>
 
       <!-- Remind Passowrd -->

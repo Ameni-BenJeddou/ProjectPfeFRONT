@@ -1,8 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { AccountService } from '../../services/Account/account.service';
-import { Account } from '../../Entities/Account';
 import { SecurityService } from 'src/app/services/security.service';
 
 

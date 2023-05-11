@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   role: string ;
+  isadmin = false;
+  isuser= false;
 
   constructor(private securityservice : SecurityService) { }
 
@@ -24,6 +26,10 @@ export class LoginComponent implements OnInit {
     if (this.securityservice.getToken()) {
       this.isLoggedIn = true;
       this.role = this.securityservice.getAccount().role;
+      if (this.role=="ROLE_ADMIN")
+        this.isadmin=true;
+        else 
+        this.isuser=true;
     }
   }
   
@@ -36,6 +42,10 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.role = this.securityservice.getAccount().role;
+        if (this.role=="ROLE_ADMIN")
+        this.isadmin=true;
+        else 
+        this.isuser=true;
         this.reloadPage();
       },
       err => {
